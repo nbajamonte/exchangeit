@@ -1,13 +1,6 @@
 name: Build NEWeyes demo
 
 on:
-  push:
-    branches:
-      - neweyes-staging
-    paths:
-      - '.neweyes-staging/**'
-      - 'build-neweyes.js'
-      - '.github/workflows/build-neweyes.yml'
   workflow_dispatch:
 
 permissions:

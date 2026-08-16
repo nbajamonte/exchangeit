@@ -1,0 +1,20 @@
+et); });
+document.getElementById('demoSearchBtn').addEventListener('click',()=>{ document.getElementById('top').scrollIntoView({behavior:'smooth'}); setTimeout(()=>document.getElementById('searchInput').focus(),350); });
+
+// Account demo
+document.getElementById('accessBtn').addEventListener('click',()=>{ renderProfile(); openDialog(document.getElementById('accountDialog')); });
+document.querySelector('.dialog-close-account').addEventListener('click',()=>closeDialog(document.getElementById('accountDialog')));
+document.getElementById('loginBtn').addEventListener('click',()=>{ const name=document.getElementById('accountName').value.trim(); const email=document.getElementById('accountEmail').value.trim(); if(!name){ document.getElementById('accountName').focus(); return; } writeStore(KEYS.profile,{name,email}); renderProfile(); closeDialog(document.getElementById('accountDialog')); toast('Profilo demo attivato'); });
+document.getElementById('logoutBtn').addEventListener('click',()=>{ try{localStorage.removeItem(KEYS.profile)}catch(_){} renderProfile(); closeDialog(document.getElementById('accountDialog')); toast('Profilo demo disconnesso'); });
+
+// Saved sources
+document.getElementById('savedBtn').addEventListener('click',()=>{ renderSaved(); openDialog(document.getElementById('savedDialog')); });
+document.querySelector('.dialog-close-saved').addEventListener('click',()=>closeDialog(document.getElementById('savedDialog')));
+
+// Privacy/local memory preference
+(function initConsent(){ let c=null; try{c=localStorage.getItem(KEYS.consent)}catch(_){}; if(c==='essential'){ allowLocal=false; } else if(c==='allow'){ allowLocal=true; } else { document.getElementById('cookieBanner').hidden=false; } })();
+document.getElementById('acceptLocalBtn').addEventListener('click',()=>{ allowLocal=true; try{localStorage.setItem(KEYS.consent,'allow')}catch(_){} document.getElementById('cookieBanner').hidden=true; toast('Memoria locale consentita'); });
+document.getElementById('essentialOnlyBtn').addEventListener('click',()=>{ allowLocal=false; try{localStorage.setItem(KEYS.consent,'essential')}catch(_){} document.getElementById('cookieBanner').hidden=true; toast('Solo funzioni essenziali'); });
+
+// --- Visual content editor -------------------------------------------------
+const editableSelectors=['.hero .eyebrow','#hero-title','.hero-copy','.access-note p','#archivi .section-headin

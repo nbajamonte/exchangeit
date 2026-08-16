@@ -1,0 +1,78 @@
+a & salute</h3>
+          <p>Contenuti divulgativi, paper, linee guida e fonti mediche qualificate. Neweyes informa: non sostituisce un professionista sanitario.</p>
+          <div class="source-row"><span>Medical</span><span>Research</span><span>Public Health</span></div>
+          <button class="card-link" type="button" data-open-category="health">Apri percorso <span>↗</span></button>
+        </article>
+
+        <article class="archive-card magenta" data-category="factcheck">
+          <div class="card-top"><span class="category-icon">✓</span><span class="availability">Information integrity</span></div>
+          <h3>Verifica & disinformazione</h3>
+          <p>Ricerca orientata a fonti di fact-checking, media literacy e osservatori dedicati all’integrità dell’informazione.</p>
+          <div class="source-row"><span>EDMO</span><span>Fact-checkers</span><span>Research</span></div>
+          <button class="card-link" type="button" data-open-category="factcheck">Apri percorso <span>↗</span></button>
+        </article>
+
+        <article class="archive-card amber" data-category="history">
+          <div class="card-top"><span class="category-icon">◫</span><span class="availability">Documentary</span></div>
+          <h3>Storia & civiltà</h3>
+          <p>Documentari, ricostruzioni, archivi museali e fonti contestualizzate per esplorare epoche, luoghi e culture.</p>
+          <div class="source-row"><span>Discovery</span><span>Museums</span><span>Public Archives</span></div>
+          <button class="card-link" type="button" data-open-category="history">Apri percorso <span>↗</span></button>
+        </article>
+      </div>
+    </section>
+
+    <section class="journey section" id="come-funziona" aria-labelledby="journey-title">
+      <div class="section-heading compact">
+        <div><p class="kicker">Designed around intent</p><h2 id="journey-title">Dal dubbio alla fonte, in tre passaggi.</h2></div>
+      </div>
+      <div class="journey-grid">
+        <div class="journey-step"><span>01</span><h3>Scrivi una domanda</h3><p>Testo libero, senza dover conoscere in anticipo l’archivio o il fornitore.</p></div>
+        <div class="journey-step"><span>02</span><h3>Neweyes classifica l’intento</h3><p>La piattaforma distingue tema, livello di affidabilità richiesto e diritti di accesso.</p></div>
+        <div class="journey-step"><span>03</span><h3>Apri il percorso giusto</h3><p>Risorse open, partner media, archivi istituzionali o fonti scientifiche: ogni risultato mostra origine e condizioni di accesso.</p></div>
+      </div>
+    </section>
+
+    <section class="partner-section section" id="partner" aria-labelledby="partner-title">
+      <div class="partner-copy">
+        <p class="kicker">Ecosistema editoriale e istituzionale</p>
+        <h2 id="partner-title">Più archivi. Una sola porta d’ingresso.</h2>
+        <p>Il modello Neweyes è pensato per connettere cataloghi tramite accordi di licenza, API autorizzate, deep-link e repository open. I marchi terzi restano di proprietà dei rispettivi titolari.</p>
+        <div class="partner-status"><span>i</span><p>Nel prototipo, Disney+, Discovery e EDMO sono mostrati come <strong>integrazioni concettuali</strong>. La messa in produzione richiede accordi/licenze effettivi e approvazione per l’uso dei relativi marchi e contenuti.</p></div>
+      </div>
+      <div class="partner-orbit" aria-label="Possibili fonti e partner">
+        <div class="orbit-center"><span class="brand-eye small"><span></span></span><b>NEW<br>EYES</b></div>
+        <div class="orbit-chip p1">Disney+</div>
+        <div class="orbit-chip p2">Discovery</div>
+        <div class="orbit-chip p3">EDMO</div>
+        <div class="orbit-chip p4">Musei</div>
+        <div class="orbit-chip p5">Ricerca</div>
+      </div>
+    </section>
+
+    <section class="access-section section" aria-labelledby="access-title">
+      <div class="access-visual">
+        <div class="glass-panel">
+          <div class="mini-eye" aria-hidden="true"></div>
+          <p class="kicker">Access logic</p>
+          <h3>Niente upselling per vedere una fonte gratuita.</h3>
+          <ul>
+            <li><span>✓</span> Open access → accesso diretto</li>
+            <li><span>✓</span> Archivio pubblico → accesso diretto</li>
+            <li><span>↗</span> Partner con abbonamento → verifica dell’account partner</li>
+            <li><span>⌁</span> Contenuti licenziati → condizioni mostrate prima dell’apertura</li>
+          </ul>
+        </div>
+      </div>
+      <div class="access-copy">
+        <p class="kicker">Accesso trasparente</p>
+        <h2 id="access-title">Il costo dipende dalla fonte, non dalla curiosità.</h2>
+        <p>Neweyes distingue in modo visibile contenuti gratuiti, contenuti inclusi in licenze istituzionali e contenuti che richiedono un servizio terzo. Nessuna ricerca viene bloccata solo per spingere un upgrade.</p>
+        <button class="primary-button" id="demoSearchBtn" type="button">Prova il motore di instradamento</button>
+      </div>
+    </section>
+
+    <section class="trust-section section" id="trust" aria-labelledby="trust-title">
+      <div class="section-heading">
+        <div><p class="kicker">Trust by design</p><h2 id="trust-title">Pronta per una compliance reale, non solo dichiarata.</h2></div>
+        <p>Il prototipo incorpora principi di trasparenza, privacy, provenienza delle fonti e accessibilità. La conformità finale va verificata sul modello operativo 

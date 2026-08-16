@@ -1,0 +1,75 @@
+e sui contratti effettivi prima del lancio.</p>
+      </div>
+      <div class="trust-grid">
+        <article><span>01</span><h3>Privacy & GDPR</h3><p>Minimizzazione dati, base giuridica, informative, gestione consenso e DPIA quando necessaria.</p></article>
+        <article><span>02</span><h3>AI trasparente</h3><p>Segnalazione dell’uso di sistemi automatizzati, supervisione umana e gestione del rischio secondo l’AI Act.</p></article>
+        <article><span>03</span><h3>Copyright & licenze</h3><p>Ingestione solo da fonti autorizzate; metadati, embedding e streaming governati da contratti e diritti.</p></article>
+        <article><span>04</span><h3>Accessibilità</h3><p>Interfaccia progettata con semantica, tastiera, focus visibile, contrasto e riduzione delle animazioni.</p></article>
+        <article><span>05</span><h3>Health safety</h3><p>I contenuti sanitari sono informativi; eventuali dati sanitari richiedono tutele rafforzate e governance dedicata.</p></article>
+        <article><span>06</span><h3>DSA & governance</h3><p>Se la piattaforma ospita contenuti o intermedia servizi, procedure per segnalazioni, trasparenza e moderazione.</p></article>
+      </div>
+      <a class="legal-link" href="#trust">Apri la checklist legale del prototipo →</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand"><span class="brand-eye small"><span></span></span><div><b>NEW EYES</b><p>Knowledge, in focus.</p></div></div>
+    <div class="footer-links"><a href="#trust">Privacy</a><a href="#trust">Cookie</a><a href="#trust">Accessibilità</a><a href="#partner">Licenze</a></div>
+    <p class="footer-note">Prototipo dimostrativo — i nomi di terze parti non implicano partnership attive o approvazione.</p>
+  </footer>
+
+  <dialog id="routeDialog" class="route-dialog" aria-labelledby="dialogTitle">
+    <button class="dialog-close" type="button" aria-label="Chiudi">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <dialog id="accountDialog" class="route-dialog" aria-labelledby="accountTitle">
+    <button class="dialog-close dialog-close-account" type="button" aria-label="Chiudi">×</button>
+    <div>
+      <div class="dialog-kicker">Profilo demo</div>
+      <h2 id="accountTitle">Accedi a Neweyes</h2>
+      <p>Questa versione usa un profilo locale nel browser per rendere funzionanti cronologia e preferiti. Non invia dati a un server.</p>
+      <div class="account-form">
+        <label>Nome visualizzato<input id="accountName" autocomplete="name" placeholder="Es. Nicolò" /></label>
+        <label>Email demo<input id="accountEmail" type="email" autocomplete="email" placeholder="nome@email.it" /></label>
+        <p class="account-message" id="accountMessage">Nessuna password: è una simulazione locale dell'area account.</p>
+        <div class="account-actions">
+          <button class="ghost-button" id="logoutBtn" type="button" hidden>Esci</button>
+          <button class="primary-button" id="loginBtn" type="button">Continua</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="savedDialog" class="route-dialog" aria-labelledby="savedTitle">
+    <button class="dialog-close dialog-close-saved" type="button" aria-label="Chiudi">×</button>
+    <div>
+      <div class="dialog-kicker">La tua raccolta</div>
+      <h2 id="savedTitle">Fonti salvate</h2>
+      <p>Apri rapidamente le fonti che hai selezionato durante le ricerche.</p>
+      <div class="saved-list" id="savedList"></div>
+    </div>
+  </dialog>
+
+  <div class="cookie-banner" id="cookieBanner" hidden role="dialog" aria-label="Preferenze privacy">
+    <h3>Preferenze privacy del prototipo</h3>
+    <p>Neweyes usa solo memoria locale per contenuti modificati, ricerche recenti, accesso demo e fonti salvate.</p>
+    <div class="cookie-actions">
+      <button class="accept" id="acceptLocalBtn" type="button">Consenti memoria locale</button>
+      <button id="essentialOnlyBtn" type="button">Solo essenziali</button>
+    </div>
+  </div>
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script>
+
+const SOURCE_CATALOG = {
+  architecture: [
+    { id:'europeana', name:'Europeana', access:'Gratis / pubblico', kind:'Archivio culturale', desc:'Arte, oggetti, libri, film e patrimonio digitale proveniente da istituzioni culturali europee.', base:'https://www.europeana.eu/en/search?query={q}' },
+    { id:'disney-ng', name:'Disney+ · National Geographic', access:'Account partner', kind:'Media partner', desc:'Percorso editoriale verso documentari National Geographic disponibili nel catalogo Disney+.', base:'https://www.disneyplus.com/it-it/browse/page-a577ee5e-2f37-443f-bc13-594a20520492' },
+    { id:'discovery', name:'discovery+', access:'Account partner', kind:'Media partner', desc:'Programmi e contenuti on demand, inclusi format su viaggi, design, lifestyle e documentari.', base:'https://www.discoveryplus.com/it/it/shows' }
+  ],
+  health: [
+    { id:'pubmed', name:'PubMed', access:'Gratis / pubblico', kind:'Letteratura scientifica', desc:'Motore di ricerca biomedico e delle scienze della vita. Neweyes inoltra direttamente i termini della tua ricerca.', base:'https://pubmed.ncbi.nlm.nih.gov/?term={q}' },
+    { id:'who', name:'World Health Organization', access:'Gratis / istituzionale', kind:'Salute pubblica', desc:'Temi, linee guida e informazioni sanitarie pubblicate dall’Organizzazione Mondiale della Sanità.', base:'https://www.who.int/health-topics' },
+    { id:'ecdc', name:'ECDC', access:'Gratis / istituzionale', kind:'Salu

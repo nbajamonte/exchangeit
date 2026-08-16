@@ -1,0 +1,43 @@
+te pubblica UE', desc:'Dati, valutazioni del rischio e materiali sulle malattie infettive nello spazio UE/SEE.', base:'https://www.ecdc.europa.eu/en/all-topics' }
+  ],
+  factcheck: [
+    { id:'edmo-fc', name:'EDMO · Fact-checking', access:'Gratis / pubblico', kind:'Fact-checking', desc:'Rete europea, brief e attività collaborative contro la disinformazione.', base:'https://edmo.eu/areas-of-activities/fact-checking/' },
+    { id:'edmo-invest', name:'EDMO · Investigations', access:'Gratis / pubblico', kind:'Indagini', desc:'Indagini e fact-check prodotti dalla rete EDMO su temi colpiti dalla disinformazione.', base:'https://edmo.eu/areas-of-activities/fact-checking/investigations-fact-checks/' },
+    { id:'edmo-map', name:'EDMO · Situational reports', access:'Gratis / pubblico', kind:'Monitoraggio', desc:'Report periodici e mappe sui principali trend di disinformazione osservati in Europa.', base:'https://edmo.eu/areas-of-activities/fact-checking/monthly-situational-reports-best-of-map/' }
+  ],
+  history: [
+    { id:'europeana-history', name:'Europeana', access:'Gratis / pubblico', kind:'Archivio storico', desc:'Patrimonio culturale digitalizzato da musei, gallerie, biblioteche e archivi europei.', base:'https://www.europeana.eu/en/search?query={q}' },
+    { id:'disney-history', name:'Disney+ · National Geographic', access:'Account partner', kind:'Documentari', desc:'Sezione National Geographic con documentari e docuserie, incluse aree dedicate alla storia.', base:'https://www.disneyplus.com/it-it/browse/page-a577ee5e-2f37-443f-bc13-594a20520492' },
+    { id:'discovery-history', name:'discovery+', access:'Account partner', kind:'Documentari', desc:'Catalogo on demand e canali del gruppo Discovery per approfondimenti documentaristici.', base:'https://www.discoveryplus.com/it/it/shows' }
+  ],
+  general: [
+    { id:'europeana-general', name:'Europeana', access:'Gratis / pubblico', kind:'Cultura', desc:'Archivio culturale digitale europeo.', base:'https://www.europeana.eu/en/search?query={q}' },
+    { id:'pubmed-general', name:'PubMed', access:'Gratis / pubblico', kind:'Scienza', desc:'Ricerca in letteratura biomedica e scienze della vita.', base:'https://pubmed.ncbi.nlm.nih.gov/?term={q}' },
+    { id:'edmo-general', name:'EDMO', access:'Gratis / pubblico', kind:'Informazione', desc:'Ricerca e strumenti europei su disinformazione, media literacy e qualità dell’informazione.', base:'https://edmo.eu/' }
+  ]
+};
+
+const categories = {
+  architecture: { title:'Architettura & patrimonio', label:'Percorso culturale', description:'La ricerca viene orientata verso archivi culturali e, quando pertinente, cataloghi documentaristici dei partner media.', note:'I link ai servizi terzi aprono i siti ufficiali. L’accesso ai cataloghi proprietari dipende dall’account del relativo servizio.' },
+  health: { title:'Scienza & salute', label:'Percorso scientifico', description:'Priorità a letteratura scientifica e fonti istituzionali, con accesso dichiarato prima dell’apertura.', note:'Neweyes orienta alle fonti: non formula diagnosi, prescrizioni o decisioni cliniche.' },
+  factcheck: { title:'Verifica & disinformazione', label:'Percorso information integrity', description:'La ricerca viene indirizzata verso fact-checking, indagini, report e strumenti di media literacy.', note:'Le fonti EDMO sono esterne a Neweyes; il prototipo non implica partnership attive.' },
+  history: { title:'Storia & civiltà', label:'Percorso storico', description:'Percorso tra archivi culturali digitalizzati e cataloghi documentaristici, distinguendo risorse pubbliche e servizi partner.', note:'Ogni scheda mostra provenienza e condizione di accesso.' },
+  general: { title:'Ricerca multidisciplinare', label:'Percorso misto', description:'La domanda tocca più aree: Neweyes propone una selezione trasversale di archivi e fonti.', note:'La classificazione di questa demo è locale e basata su parole chiave; una versione reale richiede un backend e un sistema di ranking.' }
+};
+
+const keywordMap = [
+  ['health',['salute','medic','farmac','malatt','vaccin','terapia','sintom','biolog','clinica','nutriz','virus','batter','sanitari','tumor','psicolog']],
+  ['factcheck',['disinform','fake news','fact check','fact-check','bufala','verifica','propaganda','notizia falsa','misinformation']],
+  ['architecture',['architett','edificio','palazzo','design','urban','monumento','tempio','cattedrale','brutal','barocco','rinascimento','museo','patrimonio']],
+  ['history',['storia','storico','egitto','roma','romano','grecia','greco','medioevo','guerra','civiltà','pompei','imper','archeolog','antico']]
+];
+
+const KEYS = {
+  content:'neweyesVisualContentV2', history:'neweyesSearchHistoryV1', saved:'neweyesSavedSourcesV1', profile:'neweyesProfileV1', consent:'neweyesLocalConsentV1'
+};
+let allowLocal = true;
+function readStore(key, fallback){ try { const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; } catch(_) { return fallback; } }
+function writeStore(key, value){ if(!allowLocal) return; try { localStorage.setItem(key, JSON.stringify(value)); } catch(_){} }
+function escapeHtml(text){ const div=document.createElement('div'); div.textContent=text; return div.innerHTML; }
+function toast(message){ const el=document.getElementById('toast'); el.textContent=message; el.classList.add('show'); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove('show'),1800); }
+function openDialog(dialog){ if(typeof dialog.showModal==='function')

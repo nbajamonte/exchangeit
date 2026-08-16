@@ -1,0 +1,17 @@
+ }
+function renderSaved(){
+  const box=document.getElementById('savedList'); const saved=getSaved();
+  if(!saved.length){ box.innerHTML='<div class="saved-empty">Non hai ancora salvato nessuna fonte.</div>'; return; }
+  box.innerHTML=saved.map((x,i)=>`<div class="saved-item"><div><b>${escapeHtml(x.name)}</b><p>${escapeHtml(x.kind)} · ${escapeHtml(x.access)}${x.query?' · “'+escapeHtml(x.query)+'”':''}</p></div><div class="saved-item-actions"><a href="${x.url}" target="_blank" rel="noopener noreferrer">Apri ↗</a><button type="button" data-remove-saved="${i}">Rimuovi</button></div></div>`).join('');
+  box.querySelectorAll('[data-remove-saved]').forEach(btn=>btn.addEventListener('click',()=>{ const next=getSaved(); next.splice(Number(btn.dataset.removeSaved),1); writeStore(KEYS.saved,next); renderSaved(); updateSavedCount(); if(currentQuery) showResult(currentQuery,classify(currentQuery)); }));
+}
+
+function getProfile(){ return readStore(KEYS.profile,null); }
+function renderProfile(){ const p=getProfile(); const btn=document.getElementById('accessBtn'); btn.textContent=p&&p.name?p.name:'Accedi'; document.getElementById('logoutBtn').hidden=!p; if(p){ document.getElementById('accountName').value=p.name||''; document.getElementById('accountEmail').value=p.email||''; document.getElementById('accountMessage').textContent='Profilo locale attivo. Cronologia e salvati restano su questo browser.'; } else { document.getElementById('accountMessage').textContent="Nessuna password: è una simulazione locale dell'area account."; } }
+
+// Search and navigation
+document.getElementById('searchForm').addEventListener('submit',e=>{ e.preventDefault(); const input=document.getElementById('searchInput'); const q=input.value.trim(); if(!q){ input.focus(); return; } showResult(q,classify(q)); });
+document.querySelectorAll('[data-query]').forEach(btn=>btn.addEventListener('click',()=>{ const q=btn.dataset.query; document.getElementById('searchInput').value=q; showResult(q,classify(q)); }));
+document.querySelectorAll('[data-open-category]').forEach(btn=>btn.addEventListener('click',()=>openRoute(btn.dataset.openCategory)));
+document.querySelector('#routeDialog .dialog-close').addEventListener('click',()=>closeDialog(document.getElementById('routeDialog')));
+document.getElementById('routeDialog').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeDialog(e.currentTarg

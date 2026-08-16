@@ -1,0 +1,9 @@
+.removeItem(KEYS.content)}catch(_){} editorStatus.textContent='Contenuti originali ripristinati'; });
+document.getElementById('exportEditsBtn').addEventListener('click',()=>{ const blob=new Blob([JSON.stringify(collectEdits(),null,2)],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='neweyes-contenuti.json'; a.click(); URL.revokeObjectURL(url); editorStatus.textContent='Contenuti esportati'; });
+document.getElementById('exportHtmlBtn').addEventListener('click',()=>{ const clone=document.documentElement.cloneNode(true); clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable')); clone.querySelector('body').classList.remove('edit-mode'); const html='<!DOCTYPE html>\n'+clone.outerHTML; const blob=new Blob([html],{type:'text/html;charset=utf-8'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='neweyes-personalizzato.html'; a.click(); URL.revokeObjectURL(url); editorStatus.textContent='HTML completo esportato'; });
+
+applySavedContent(); renderHistory(); updateSavedCount(); renderProfile(); renderSaved();
+
+  </script>
+</body>
+</html>

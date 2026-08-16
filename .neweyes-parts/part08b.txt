@@ -1,0 +1,25 @@
+tegories[key]||categories.general; const dialog=document.getElementById('routeDialog'); const content=document.getElementById('dialogContent');
+  const sources=SOURCE_CATALOG[key]||SOURCE_CATALOG.general;
+  content.innerHTML=`<div class="dialog-kicker">${c.label}</div><h2 id="dialogTitle">${c.title}</h2><p>${c.description}</p><div class="route-sources">${sources.map(s=>`<div class="route-source"><div><b>${escapeHtml(s.name)}</b><br><small>${escapeHtml(s.kind)}</small></div><span>${escapeHtml(s.access)}</span></div>`).join('')}</div><p class="route-disclaimer">${c.note}</p>`;
+  openDialog(dialog);
+}
+
+function getHistory(){ return readStore(KEYS.history,[]); }
+function addHistory(query){ let items=getHistory().filter(x=>x.toLowerCase()!==query.toLowerCase()); items.unshift(query); items=items.slice(0,5); writeStore(KEYS.history,items); renderHistory(items); }
+function renderHistory(items=getHistory()){
+  const box=document.getElementById('searchHistory'); box.innerHTML=''; box.hidden=!items.length; if(!items.length) return;
+  const label=document.createElement('span'); label.className='history-label'; label.textContent='Recenti:'; box.appendChild(label);
+  items.forEach(q=>{ const b=document.createElement('button'); b.type='button'; b.textContent=q; b.title=q; b.addEventListener('click',()=>{ document.getElementById('searchInput').value=q; showResult(q,classify(q)); }); box.appendChild(b); });
+}
+
+function getSaved(){ return readStore(KEYS.saved,[]); }
+function findSource(id){ for(const [cat,list] of Object.entries(SOURCE_CATALOG)){ const s=list.find(x=>x.id===id); if(s) return {...s,category:cat}; } return null; }
+function isSaved(id){ return getSaved().some(x=>x.id===id); }
+function toggleSaved(id,query,category,button){
+  let saved=getSaved(); const index=saved.findIndex(x=>x.id===id);
+  if(index>=0){ saved.splice(index,1); toast('Fonte rimossa dai salvati'); }
+  else { const source=findSource(id); if(source) saved.unshift({id,query,category,url:buildUrl(source,query),name:source.name,access:source.access,kind:source.kind}); toast('Fonte salvata'); }
+  writeStore(KEYS.saved,saved); updateSavedCount(); renderSaved();
+  if(button){ const active=isSaved(id); button.classList.toggle('is-saved',active); button.textContent=active?'✓ Salvata':'＋ Salva'; }
+}
+function updateSavedCount(){ document.getElementById('savedCount').textContent=String(getSaved().length);

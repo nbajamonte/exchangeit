@@ -1,0 +1,36 @@
+ dialog.showModal(); else dialog.setAttribute('open',''); }
+function closeDialog(dialog){ if(typeof dialog.close==='function') dialog.close(); else dialog.removeAttribute('open'); }
+function classify(query){ const q=query.toLowerCase(); let best=['general',0]; for(const [cat,words] of keywordMap){ const score=words.reduce((a,w)=>a+(q.includes(w)?1:0),0); if(score>best[1]) best=[cat,score]; } return best[0]; }
+function buildUrl(source, query){ return source.base.includes('{q}') ? source.base.replace('{q}', encodeURIComponent(query)) : source.base; }
+
+let currentQuery='';
+function sourceCard(source, query){
+  const saved=isSaved(source.id);
+  return `<article class="live-source">
+    <div class="live-source-head"><div><span class="access-badge">${escapeHtml(source.access)}</span><h4>${escapeHtml(source.name)}</h4></div><small>${escapeHtml(source.kind)}</small></div>
+    <p>${escapeHtml(source.desc)}</p>
+    <div class="source-actions">
+      <a href="${buildUrl(source,query)}" target="_blank" rel="noopener noreferrer">Apri fonte ↗</a>
+      <button type="button" class="save-source-btn ${saved?'is-saved':''}" data-source-id="${source.id}" data-query="${escapeHtml(query)}">${saved?'✓ Salvata':'＋ Salva'}</button>
+    </div>
+  </article>`;
+}
+
+function showResult(query, categoryKey){
+  currentQuery=query;
+  const result=document.getElementById('resultPanel'); const c=categories[categoryKey]; const sources=SOURCE_CATALOG[categoryKey]||SOURCE_CATALOG.general;
+  result.classList.remove('is-hidden');
+  result.innerHTML=`
+    <span class="route-tag">Percorso consigliato da Neweyes</span>
+    <h3>“${escapeHtml(query)}” → ${c.title}</h3>
+    <p>${c.description}</p>
+    <div class="route-meta"><span>${sources.length} fonti</span><span>Accesso dichiarato</span><span>Link ufficiali</span></div>
+    <div class="live-source-grid">${sources.map(s=>sourceCard(s,query)).join('')}</div>
+    <p class="prototype-note">Demo funzionante: la classificazione avviene nel browser. I pulsanti “Apri fonte” rimandano ai siti esterni ufficiali; Neweyes non ospita né redistribuisce i loro contenuti.</p>`;
+  result.querySelectorAll('.save-source-btn').forEach(btn=>btn.addEventListener('click',()=>toggleSaved(btn.dataset.sourceId, query, categoryKey, btn)));
+  addHistory(query);
+  result.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function openRoute(key){
+  const c=ca

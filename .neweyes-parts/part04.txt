@@ -1,0 +1,99 @@
+on-button{padding:9px 10px}.ghost-button{padding:9px 11px}}
+@media(max-width:520px){.header-icon-button .button-label{display:none}.header-icon-button .count{margin-left:0}.site-header{height:62px}.brand{font-size:.9rem}.live-source{min-height:auto}.source-actions a,.source-actions button{flex:1;text-align:center}}
+
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Vai al contenuto</a>
+
+  <aside class="editor-toolbar" id="editorToolbar" aria-label="Strumenti di modifica">
+    <button class="editor-toggle" id="editToggle" type="button">✎ Modifica contenuti</button>
+    <div class="editor-actions" id="editorActions" hidden>
+      <span class="editor-status" id="editorStatus">Modalità modifica attiva</span>
+      <button type="button" id="saveEditsBtn">Salva</button>
+      <button type="button" id="resetEditsBtn">Ripristina</button>
+      <button type="button" id="exportEditsBtn">Esporta testi</button>
+      <button type="button" id="exportHtmlBtn">Esporta HTML</button>
+    </div>
+  </aside>
+
+  <header class="site-header" aria-label="Intestazione principale">
+    <a class="brand" href="#top" aria-label="Neweyes, home">
+      <span class="brand-eye" aria-hidden="true"><span></span></span>
+      <span>NEW<span>EYES</span></span>
+    </a>
+    <nav class="top-nav" aria-label="Navigazione principale">
+      <a href="#archivi">Archivi</a>
+      <a href="#come-funziona">Come funziona</a>
+      <a href="#partner">Ecosistema</a>
+      <a href="#trust">Trust & Legal</a>
+    </nav>
+    <div class="header-actions">
+      <button class="header-icon-button" id="savedBtn" type="button" aria-label="Apri elementi salvati"><span class="button-label">Salvati</span><span class="count" id="savedCount">0</span></button>
+      <button class="ghost-button" id="accessBtn" type="button">Accedi</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-vignette" aria-hidden="true"></div>
+      <div class="orb orb-a" aria-hidden="true"></div>
+      <div class="orb orb-b" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <div class="eyebrow"><span class="live-dot"></span> Knowledge routing engine</div>
+        <h1 id="hero-title">Non cercare ovunque.<br><span>Guarda nel posto giusto.</span></h1>
+        <p class="hero-copy">
+          Neweyes interpreta il tipo di ricerca e ti indirizza verso l’archivio più utile: cultura e architettura,
+          scienza e salute, verifica delle informazioni, storia, media e documentari.
+        </p>
+
+        <form class="search-shell" id="searchForm" role="search">
+          <div class="search-icon" aria-hidden="true">⌕</div>
+          <label class="sr-only" for="searchInput">Cosa vuoi cercare?</label>
+          <input id="searchInput" name="q" autocomplete="off" placeholder="Es. architettura brutalista, vaccini, Pompei, disinformazione…" />
+          <button type="submit">Esplora <span aria-hidden="true">→</span></button>
+        </form>
+
+        <div class="quick-prompts" aria-label="Ricerche di esempio">
+          <button type="button" data-query="architettura romana e templi">Architettura</button>
+          <button type="button" data-query="fonti verificate su un tema di salute">Salute</button>
+          <button type="button" data-query="verifica una notizia online">Fact-checking</button>
+          <button type="button" data-query="documentari sulla storia dell'antico Egitto">Storia</button>
+        </div>
+
+        <div class="search-history" id="searchHistory" hidden aria-label="Ricerche recenti"></div>
+
+        <div class="access-note">
+          <span aria-hidden="true">◉</span>
+          <p><strong>Nessun “piano” da scegliere.</strong> L’accesso cambia in base alla ricerca e ai diritti del contenuto. Le risorse open e pubbliche restano accessibili senza costi aggiuntivi.</p>
+        </div>
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true">SCOPRI GLI ARCHIVI <span>↓</span></div>
+    </section>
+
+    <section class="routing-panel section" id="archivi" aria-labelledby="routing-title">
+      <div class="section-heading">
+        <div>
+          <p class="kicker">Un accesso diverso per ogni domanda</p>
+          <h2 id="routing-title">La ricerca decide il percorso.</h2>
+        </div>
+        <p>Neweyes non vende pacchetti indistinti: riconosce l’intento e apre il percorso verso archivi, media partner e fonti istituzionali pertinenti.</p>
+      </div>
+
+      <div id="resultPanel" class="result-panel is-hidden" aria-live="polite"></div>
+
+      <div class="archive-grid">
+        <article class="archive-card violet" data-category="architecture">
+          <div class="card-top"><span class="category-icon">⌂</span><span class="availability">Media + Archive</span></div>
+          <h3>Architettura & patrimonio</h3>
+          <p>Monumenti, città, design, storia dell’arte e patrimonio audiovisivo, con percorsi editoriali e documentari.</p>
+          <div class="source-row"><span>Disney+</span><span>Discovery</span><span>Open Culture</span></div>
+          <button class="card-link" type="button" data-open-category="architecture">Apri percorso <span>↗</span></button>
+        </article>
+
+        <article class="archive-card cyan" data-category="health">
+          <div class="card-top"><span class="category-icon">✚</span><span class="availability">Verified sources</span></div>
+          <h3>Scienz

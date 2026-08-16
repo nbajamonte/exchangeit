@@ -1,24 +1,22 @@
 const fs = require('fs');
 const path = require('path');
-const zlib = require('zlib');
-const crypto = require('crypto');
 
-const dir = path.join(process.cwd(), '.neweyes-staging');
+const dir = path.join(process.cwd(), '.neweyes-parts');
 const parts = fs.readdirSync(dir)
-  .filter(name => /^part.*\.b64$/i.test(name))
+  .filter(name => /^part.*\.txt$/i.test(name))
   .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
 
-if (!parts.length) throw new Error('Nessun blocco NEWeyes trovato');
-console.log('Blocchi trovati:', parts.join(', '));
+if (!parts.length) throw new Error('Nessun frammento NEWeyes trovato');
 
-const b64 = parts.map(name => fs.readFileSync(path.join(dir, name), 'utf8').replace(/\s+/g, '')).join('');
-const compressed = Buffer.from(b64, 'base64');
-const html = zlib.brotliDecompressSync(compressed);
-const sha = crypto.createHash('sha256').update(html).digest('hex');
-
-if (html.length < 100000) throw new Error(`HTML ricostruito troppo piccolo: ${html.length} bytes`);
+const buffers = parts.map(name => fs.readFileSync(path.join(dir, name)));
+const html = Buffer.concat(buffers);
 const text = html.toString('utf8');
-if (!/NEWeyes/i.test(text) || !/<html/i.test(text)) throw new Error('Il file ricostruito non sembra la demo NEWeyes');
 
-fs.writeFileSync('index.html', html);
-console.log(`NEWeyes ricostruito: ${html.length} bytes; sha256=${sha}`);
+if (html.length !== 57207) throw new Error(`Dimensione NEWeyes inattesa: ${html.length} bytes`);
+if (!text.startsWith('<!DOCTYPE html>')) throw new Error('DOCTYPE NEWeyes mancante');
+if (!/<title>Neweyes/i.test(text)) throw new Error('Titolo NEWeyes mancante');
+if (!/<\/script>/i.test(text) || !/<\/html>/i.test(text)) throw new Error('HTML NEWeyes incompleto');
+
+fs.mkdirSync(path.join(process.cwd(), 'dist'), { recursive: true });
+fs.writeFileSync(path.join(process.cwd(), 'dist', 'index.html'), html);
+console.log(`NEWeyes ricostruito correttamente: ${html.length} bytes da ${parts.length} frammenti`);

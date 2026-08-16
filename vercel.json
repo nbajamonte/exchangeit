@@ -1,4 +1,4 @@
 {
-  "buildCommand": "mkdir -p dist && cat .neweyes-parts/part*.txt > dist/index.html && test \"$(wc -c < dist/index.html | tr -d ' ')\" = \"57207\" && grep -q '<!DOCTYPE html>' dist/index.html && grep -q '<title>Neweyes' dist/index.html && grep -q '</script>' dist/index.html && grep -q '</html>' dist/index.html",
+  "buildCommand": "node build-neweyes.js",
   "outputDirectory": "dist"
 }
